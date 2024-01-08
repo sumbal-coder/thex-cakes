@@ -1,0 +1,23 @@
+/* 
+.bg-primary-alt{
+    background-color: #ffdf86 !important;
+    color: black !important;
+    font-weight: bolder;
+}
+.badge-warning{
+    background-color: #FFBF00 !important;
+}
+.btn-info{
+    background-color: #12adad !important;
+}
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color:#ffc107 !important;
+    color: black;
+    font-weight: bolder;
+}
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
+    background-color: #fffbf0 !important;
+    color: black;
+    font-weight: bolder;
+} 
+ */
