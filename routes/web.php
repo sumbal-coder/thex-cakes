@@ -24,6 +24,7 @@ use App\Livewire\Backend\Role\EditRole as BackendRoleEditRole;
 use App\Livewire\Backend\User\EditUser as BackendUserEditUser;
 use App\Livewire\Backend\User\CreateUser as BackendUserCreateUser;
 use App\Livewire\Backend\Role\CreateRole  as BackendRoleCreateRole;
+use App\Livewire\Backend\ActivityLog\ActivityLog as BackendActivityLogActivityLog;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,8 @@ Route::middleware('auth')->group(function () {
     Route::get('content/about-us', BackendAboutUs::class)->can(PermissionEnum::EDIT_ABOUT_US->value);
     Route::get('/address', BackendAddress::class)->can(PermissionEnum::EDIT_ADDRESS->value);
     Route::get('/content/page', BackendContent::class)->can(PermissionEnum::EDIT_CONTENT->value);
+
+    Route::get('activity-logs', BackendActivityLogActivityLog::class)->can(PermissionEnum::VIEW_ACTIVITY_LOG->value);
 });
 
 Route::get('/home', Home::class);

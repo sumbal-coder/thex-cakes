@@ -83,6 +83,24 @@
 						<p>Content</p>
 					</a>
 				</li>
+
+				<li @if (request()->is('activity-logs*')) class="nav-item menu-open" @else class="nav-item" @endif>
+					<a href="#" @if (request()->is('activity-logs*')) class="nav-link active" @else class="nav-link" @endif>
+						<i class="fa-solid fa-cogs nav-icon"></i>
+						<p>
+							Settings
+							<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a wire:navigate href="{{ url('activity-logs') }}" @if (request()->is('activity-logs*')) class="nav-link active" @else class="nav-link" @endif>
+								<i class="nav-icon fa-solid fas fa-user"></i>
+								<p>Activity Log</p>
+							</a>
+						</li>
+					</ul>
+				</li>
 			</ul>
 		</nav>
 	</div>

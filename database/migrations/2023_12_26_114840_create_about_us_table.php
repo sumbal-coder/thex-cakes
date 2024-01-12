@@ -18,6 +18,7 @@ return new class extends Migration
             $table->longText('mission');
             $table->longText('vision');
             $table->timestamps();
+            $table->softDeletes()->nullable();
         });
     }
 

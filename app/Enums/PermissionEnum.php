@@ -19,7 +19,7 @@ enum PermissionEnum: string
     case ADD_ROLES = "create roles";
     case EDIT_ROLES = "edit roles";
     case DELETE_ROLES = "delete roles";
-    
+
         // Product Management
     case VIEW_PRODUCTS = "view products";
     case ADD_PRODUCTS = "create products";
@@ -40,4 +40,7 @@ enum PermissionEnum: string
 
         // Content
     case EDIT_CONTENT = "edit content";
+
+        // Activity Log
+    case VIEW_ACTIVITY_LOG = "view activity log";
 }

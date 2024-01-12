@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('subject')->nullable();
             $table->text('message')->nullable();
             $table->timestamps();
+            $table->softDeletes()->nullable();
         });
     }
 

@@ -6,13 +6,26 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes, CausesActivity, LogsActivity;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['added_by', 'name', 'description'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs()
+            ->useLogName('Product');
+    }
 
     protected $fillable = [
-        'user_id',
+        'added_by',
         'name',
         'description',
         'image',

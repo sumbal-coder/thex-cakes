@@ -24,6 +24,7 @@ return new class extends Migration
             $table->longText('optional_website')->nullable();
             $table->longText('link')->nullable();
             $table->timestamps();
+            $table->softDeletes()->nullable();
         });
     }
 

@@ -48,7 +48,7 @@ class CreateRole extends Component
             $this->selectAllPermissions = false;
         } else {
             $uncheckedPermissions = $this->getUncheckedPermissionsCount();
-            $this->selectAllPermissions = $uncheckedPermissions === 0;
+            $this->selectAllPermissions = $uncheckedPermissions === 0 ? true : false;
         }
     }
 

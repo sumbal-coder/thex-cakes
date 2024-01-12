@@ -42,6 +42,7 @@ class EditRole extends Component
         $this->name = $role->name;
         $this->permissionGroups = PermissionGroup::get();
         $this->permissions = $this->role->permissions->pluck('id') ?: collect();
+
         if ($this->permissions->count() !== Permission::count()) {
             $this->selectAllPermissions = false;
         } else {
@@ -60,7 +61,7 @@ class EditRole extends Component
             $this->selectAllPermissions = false;
         } else {
             $uncheckedPermissions = $this->getUncheckedPermissionsCount();
-            $this->selectAllPermissions = $uncheckedPermissions === 0;
+            $this->selectAllPermissions = $uncheckedPermissions === 0 ? true : false;
         }
     }
 
@@ -81,16 +82,16 @@ class EditRole extends Component
         $this->validate();
 
         if ($this->role->save()) {
+
             // sync permissions with role
             $permissions = Permission::whereIn('id', $this->permissions)->get();
             $this->role->syncPermissions($permissions);
 
-            // sync permissions with those users which have this role
-            $usersWithRole = ModelsUser::role($this->role->name)->get();
-
-            foreach ($usersWithRole as $user) {
-                $user->syncPermissions($permissions);
-            }
+            // sync permissions with those users who have this role
+            // $usersWithRole = User::role($this->role->name)->get();
+            // foreach ($usersWithRole as $user) {
+            //     $user->syncPermissions($permissions);
+            // }
 
             session()->flash('success', "Role and associated user permissions updated successfully.");
             $this->redirect(Role::class);

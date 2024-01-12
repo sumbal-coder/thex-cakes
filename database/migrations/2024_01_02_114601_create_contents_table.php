@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('added_by')->references('id')->on('users')->onDelete('cascade');
             $table->longText('content')->nullable();
             $table->timestamps();
+            $table->softDeletes()->nullable();
         });
     }
 

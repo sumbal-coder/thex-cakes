@@ -81,6 +81,11 @@ class PermissionSeeder extends Seeder
                         PermissionEnum::EDIT_CONTENT->value,
                     ]
                 ],
+
+                [
+                    "name" => 'Activity Log',
+                    "permissions" =>  [PermissionEnum::VIEW_ACTIVITY_LOG->value]
+                ],
             ];
 
         foreach ($permission_groups as  $group) {

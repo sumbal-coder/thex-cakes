@@ -54,6 +54,7 @@ class RoleSetting extends Component
         if ($value) {
             $role = Role::find($value);
             $this->permissions = $role->permissions->pluck('id');
+            
             if ($this->permissions->count() !== Permission::count()) {
                 $this->selectAllPermissions = false;
             } else {
@@ -61,6 +62,7 @@ class RoleSetting extends Component
             }
         } else {
             $this->permissions = collect();
+            $this->selectAllPermissions = false;
         }
     }
 
@@ -75,7 +77,7 @@ class RoleSetting extends Component
             $this->selectAllPermissions = false;
         } else {
             $uncheckedPermissions = $this->getUncheckedPermissionsCount();
-            $this->selectAllPermissions = $uncheckedPermissions === 0;
+            $this->selectAllPermissions = $uncheckedPermissions === 0 ? true : false;
         }
     }
 
@@ -97,15 +99,18 @@ class RoleSetting extends Component
         $role = Role::find($this->role);
         $this->user->syncRoles($role);
         $permissions = Permission::whereIn('id', $this->permissions)->get();
-        // sync permissions with model_has_permissions and role_has_permissions tables
-        $this->user->syncPermissions($permissions);
-        $role->syncPermissions($permissions);
-        // sync permissions with those users which have this role
-        $usersWithRole = ModelsUser::role($role->name)->get();
 
-        foreach ($usersWithRole as $user) {
-            $user->syncPermissions($permissions);
-        }
+        // sync permissions with user
+        $this->user->syncPermissions($permissions);
+
+        // sync permissions with role
+        // $role->syncPermissions($permissions);
+
+        // sync permissions with those users who have this role
+        // $usersWithRole = User::role($role->name)->get();
+        // foreach ($usersWithRole as $user) {
+        //     $user->syncPermissions($permissions);
+        // }
 
         $this->dispatch('showSuccessMessage', "Permissions updated successfully");
     }
